@@ -6,9 +6,4 @@
     android:layout_height="match_parent"
     tools:context="um.comidar.MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
 </LinearLayout>
