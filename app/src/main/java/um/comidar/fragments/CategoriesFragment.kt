@@ -1,5 +1,6 @@
 package um.comidar.fragments
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
@@ -24,23 +25,27 @@ import java.io.IOException
 
 class CategoriesFragment : Fragment() {
 
+    private lateinit var listener: OnCategorySelected
+
     companion object {
         fun newInstance() = CategoriesFragment()
     }
 
-    private lateinit var viewModel: CategoriesViewModel
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.categories_fragment, container, false)
+        if (context is OnCategorySelected) {
+            listener = context
+        } else {
+            throw ClassCastException(context.toString() + " must implement OnCategorySelected.")
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CategoriesViewModel::class.java)
-        fetchCategories()
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.categories_fragment, container, false)
     }
 
     private fun showCategories(categories: List<Category>) {
@@ -68,5 +73,9 @@ class CategoriesFragment : Fragment() {
                 Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
             }
         }, "category")
+    }
+
+    interface OnCategorySelected {
+        fun onCategorySelected(category: Category)
     }
 }
