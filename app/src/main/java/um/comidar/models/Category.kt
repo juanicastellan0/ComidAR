@@ -1,11 +1,7 @@
 package um.comidar.models
 
-class Category(categoryId : Long, name : String) {
-    var categoryId : Long = 0
-    var name : String = ""
+import java.io.Serializable
 
-    init {
-        this.categoryId = categoryId
-        this.name = name
-    }
-}
+data class Category(val imageResId: Int,
+                    val categoryId: Long = 0,
+                    val name: String): Serializable

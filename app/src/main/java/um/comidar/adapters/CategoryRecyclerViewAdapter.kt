@@ -8,28 +8,4 @@ import kotlinx.android.synthetic.main.category_layout.view.*
 import um.comidar.R
 import um.comidar.models.Category
 
-class CategoryRecyclerViewAdapter(private val categories: List<Category>)
-    : RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_layout, parent, false)
-        return CategoryViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categories[position]
-        holder.view.categoryName.text = category.name
-        when (category.name) {
-            "Pastas" -> holder.view.categoryImage.setImageResource(R.drawable.spaguetti)
-            "Carnes" -> holder.view.categoryImage.setImageResource(R.drawable.meat)
-            "Pizzas" -> holder.view.categoryImage.setImageResource(R.drawable.pizza)
-            "Hamburguesas" -> holder.view.categoryImage.setImageResource(R.drawable.burger)
-            "Perros" -> holder.view.categoryImage.setImageResource(R.drawable.hot_dog)
-            "Postres" -> holder.view.categoryImage.setImageResource(R.drawable.cupcake)
-        }
-    }
-
-    override fun getItemCount(): Int = categories.size
-
-    inner class CategoryViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 }
