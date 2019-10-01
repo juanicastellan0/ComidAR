@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="images">
+        <item>@drawable/burger</item>
+        <item>@drawable/cupcake</item>
+        <item>@drawable/hot_dog</item>
+        <item>@drawable/meat</item>
+        <item>@drawable/pizza</item>
+        <item>@drawable/spaguetti</item>
+    </array>
+
+    <string-array name="categoryNames">
+        <item>Hamburguesas</item>
+        <item>Postres</item>
+        <item>Panchos</item>
+        <item>Carnes</item>
+        <item>Pizzas</item>
+        <item>Pastas</item>
+    </string-array>
+</resources>

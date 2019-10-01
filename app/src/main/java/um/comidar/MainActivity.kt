@@ -1,53 +1,32 @@
 package um.comidar
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.fragment.app.FragmentActivity
+import um.comidar.fragments.CategoriesFragment
+import um.comidar.fragments.CategoryDetailsFragment
 import um.comidar.models.Category
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import um.comidar.helpers.ComidarApi
-import java.io.IOException
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var linearLayoutManager: LinearLayoutManager
+class MainActivity : FragmentActivity(), CategoriesFragment.OnCategorySelected {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        linearLayoutManager = LinearLayoutManager(this)
-
-        ComidarApi.getList(object: Callback {
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                val gson = GsonBuilder().create()
-                val categories = gson.fromJson(body, Array<Category>::class.java)
-                categories?.let {
-                    showCategories(categories.toList())
-                }
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
-            }
-        }, "category")
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.mainLayout, CategoriesFragment.newInstance(), "categoryList")
+                .commit()
+        }
     }
 
-    fun showCategories(categories: List<Category>) {
-        Handler(Looper.getMainLooper()).post {
-            kotlin.run {
-                categoryRecyclerView.layoutManager = LinearLayoutManager(this)
-                categoryRecyclerView.adapter = CategoryRecyclerViewAdapter(categories)
-            }
-        }
+    override fun onCategorySelected(category: Category) {
+        val detailsFragment = CategoryDetailsFragment.newInstance(category)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainLayout, detailsFragment, "categoryDetails")
+            .addToBackStack(null)
+            .commit()
     }
 }
 
