@@ -2,16 +2,25 @@ package um.comidar.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.GsonBuilder
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
 
 import um.comidar.R
 import um.comidar.models.Category
-import um.comidar.databinding.CategoryLayoutBinding
+import um.comidar.databinding.CategoryItemLayoutBinding
+import um.comidar.helpers.ComidarApi
+import java.io.IOException
 
 class CategoriesFragment : Fragment() {
 
@@ -43,17 +52,15 @@ class CategoriesFragment : Fragment() {
         typedArray.recycle()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fetchCategories()
+    }
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.categories_list_fragment, container,
-            false)
-        val activity = activity as Context
-        val recyclerView = view.findViewById<RecyclerView>(R.id.categoryRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = CategoryRecyclerViewAdapter(activity)
-        return view
+        return inflater.inflate(R.layout.categories_list_fragment, container,false)
     }
 
     internal inner class CategoryRecyclerViewAdapter(context: Context)
@@ -71,7 +78,7 @@ class CategoriesFragment : Fragment() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CategoryViewHolder {
             val recyclerItemCategoryListBinding =
-                CategoryLayoutBinding.inflate(layoutInflater, viewGroup, false)
+                CategoryItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
             return CategoryViewHolder(
                 recyclerItemCategoryListBinding.root,
                 recyclerItemCategoryListBinding
@@ -83,7 +90,7 @@ class CategoriesFragment : Fragment() {
 
     internal inner class CategoryViewHolder(view: View,
                                             private val recyclerItemCategoryListBinding:
-                                            CategoryLayoutBinding
+                                            CategoryItemLayoutBinding
     ) : RecyclerView.ViewHolder(view) {
 
         fun setData(category: Category) {
@@ -95,7 +102,6 @@ class CategoriesFragment : Fragment() {
         fun onCategorySelected(category: Category)
     }
 
-    /*
     private fun fetchCategories() {
         ComidarApi.getList(object: Callback {
             override fun onResponse(call: Call, response: Response) {
@@ -116,11 +122,11 @@ class CategoriesFragment : Fragment() {
     private fun showCategories(categories: List<Category>) {
         Handler(Looper.getMainLooper()).post {
             kotlin.run {
-                categoryRecyclerView.layoutManager = LinearLayoutManager(activity)
-                categoryRecyclerView.adapter =
-                    CategoryRecyclerViewAdapter(categories)
+                val activity = activity as Context
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.categoryRecyclerView)
+                recyclerView?.layoutManager = LinearLayoutManager(activity)
+                recyclerView?.adapter = CategoryRecyclerViewAdapter(activity)
             }
         }
     }
-     */
 }
