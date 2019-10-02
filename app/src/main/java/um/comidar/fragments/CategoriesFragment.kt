@@ -25,7 +25,6 @@ import java.io.IOException
 class CategoriesFragment : Fragment() {
 
     private lateinit var imageResIds: IntArray
-    private lateinit var categoryNames: Array<String>
     private lateinit var listener: OnCategorySelected
 
     companion object {
@@ -41,15 +40,14 @@ class CategoriesFragment : Fragment() {
             throw ClassCastException("$context must implement OnCategorySelected.")
         }
 
-        val resources = context.resources
-        categoryNames = resources.getStringArray(R.array.categoryNames)
-        val typedArray = resources.obtainTypedArray(R.array.images)
-        val imageCount = categoryNames.size
-        imageResIds = IntArray(imageCount)
-        for (i in 0 until imageCount) {
-            imageResIds[i] = typedArray.getResourceId(i, 0)
-        }
-        typedArray.recycle()
+//        val resources = context.resources
+//        val typedArray = resources.obtainTypedArray(R.array.images)
+//        val imageCount = typedArray.indexCount
+//        imageResIds = IntArray(imageCount)
+//        for (i in 0 until imageCount) {
+//            imageResIds[i] = typedArray.getResourceId(i, 0)
+//        }
+//        typedArray.recycle()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,13 +61,17 @@ class CategoriesFragment : Fragment() {
         return inflater.inflate(R.layout.categories_list_fragment, container,false)
     }
 
-    internal inner class CategoryRecyclerViewAdapter(context: Context)
-        : RecyclerView.Adapter<CategoryViewHolder>() {
+    internal inner class CategoryRecyclerViewAdapter(
+        private val categories: List<Category>,
+        context: Context
+    ) : RecyclerView.Adapter<CategoryViewHolder>() {
         override fun onBindViewHolder(
             viewHolder: CategoryViewHolder,
             position: Int
         ) {
-            val category = Category(imageResIds[position], 0, categoryNames[position])
+//            print(imageResIds)
+            val category : Category = categories[position]
+//            category.imageResId = imageResIds[position]
             viewHolder.setData(category)
             viewHolder.itemView.setOnClickListener { listener.onCategorySelected(category) }
         }
@@ -85,7 +87,7 @@ class CategoriesFragment : Fragment() {
             )
         }
 
-        override fun getItemCount() = categoryNames.size
+        override fun getItemCount() = categories.size
     }
 
     internal inner class CategoryViewHolder(view: View,
@@ -125,7 +127,7 @@ class CategoriesFragment : Fragment() {
                 val activity = activity as Context
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.categoryRecyclerView)
                 recyclerView?.layoutManager = LinearLayoutManager(activity)
-                recyclerView?.adapter = CategoryRecyclerViewAdapter(activity)
+                recyclerView?.adapter = CategoryRecyclerViewAdapter(categories, activity)
             }
         }
     }

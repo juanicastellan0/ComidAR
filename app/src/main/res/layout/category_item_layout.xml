@@ -14,6 +14,7 @@
                 android:id="@+id/categoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{category.name}"
                 android:textSize="20sp"/>
         <ImageButton
                 android:id="@+id/categoryImage"
