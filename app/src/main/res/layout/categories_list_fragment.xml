@@ -8,6 +8,7 @@
     <androidx.recyclerview.widget.RecyclerView
             tools:listitem="@layout/category_item_layout"
             android:id="@+id/categoryRecyclerView"
+            android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

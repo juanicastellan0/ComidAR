@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:background="@color/colorBackground"
         tools:ignore="RtlHardcoded">
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,9 +27,8 @@
                 android:text="@{restaurant.name}" />
             <ImageView
                 android:id="@+id/restaurantPhoto"
-                imageResource="@{restaurant.imageResId}"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="400dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:adjustViewBounds="true"
@@ -42,6 +42,30 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="0dp"
                     android:text="@{restaurant.description}" />
+            <TextView
+                    android:id="@+id/restaurantDirection"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@{restaurant.direction}" />
+            <TextView
+                    android:id="@+id/restaurantTelephone"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@{restaurant.telephone}" />
+            <TextView
+                    android:id="@+id/restaurantEmail"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="@{restaurant.email}" />
         </LinearLayout>
     </ScrollView>
 </layout>

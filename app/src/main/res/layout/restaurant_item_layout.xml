@@ -6,10 +6,12 @@
                 name="restaurant"
                 type="um.comidar.models.Restaurant" />
     </data>
-    <FrameLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:padding="8dp"
+        android:orientation="horizontal">
         <ImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"
@@ -32,12 +34,14 @@
                     android:id="@+id/restaurantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{restaurant.name}"
                     android:textStyle="bold"
                     android:textSize="18sp"/>
             <TextView
                     android:id="@+id/restaurantDescription"
+                    android:text="@{restaurant.description}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 </layout>

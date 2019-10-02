@@ -24,11 +24,11 @@ class MainActivity : FragmentActivity(),
         }
     }
 
-    override fun onCategorySelected(category: Category) {
-        val detailsFragment = RestaurantsFragment.newInstance()
+    override fun onCategorySelected(categoryId: Long) {
+        val restaurantsFragment = RestaurantsFragment.newInstance(categoryId)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.mainLayout, detailsFragment, "restaurantList")
+            .add(R.id.mainLayout, restaurantsFragment, "restaurantList")
             .addToBackStack(null)
             .commit()
     }
@@ -37,7 +37,7 @@ class MainActivity : FragmentActivity(),
         val detailsFragment = RestaurantDetailsFragment.newInstance(restaurant)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.mainLayout, detailsFragment, "restaurantDetails")
+            .add(R.id.mainLayout, detailsFragment, "restaurantDetails")
             .addToBackStack(null)
             .commit()
     }

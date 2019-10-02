@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,6 @@ import java.io.IOException
 
 class CategoriesFragment : Fragment() {
 
-    private lateinit var imageResIds: IntArray
     private lateinit var listener: OnCategorySelected
 
     companion object {
@@ -39,15 +39,6 @@ class CategoriesFragment : Fragment() {
         } else {
             throw ClassCastException("$context must implement OnCategorySelected.")
         }
-
-//        val resources = context.resources
-//        val typedArray = resources.obtainTypedArray(R.array.images)
-//        val imageCount = typedArray.indexCount
-//        imageResIds = IntArray(imageCount)
-//        for (i in 0 until imageCount) {
-//            imageResIds[i] = typedArray.getResourceId(i, 0)
-//        }
-//        typedArray.recycle()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,11 +60,11 @@ class CategoriesFragment : Fragment() {
             viewHolder: CategoryViewHolder,
             position: Int
         ) {
-//            print(imageResIds)
             val category : Category = categories[position]
-//            category.imageResId = imageResIds[position]
             viewHolder.setData(category)
-            viewHolder.itemView.setOnClickListener { listener.onCategorySelected(category) }
+            viewHolder.itemView.findViewById<ImageButton>(R.id.categoryImage).setOnClickListener {
+                listener.onCategorySelected(category.categoryId)
+            }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
@@ -101,7 +92,7 @@ class CategoriesFragment : Fragment() {
     }
 
     interface OnCategorySelected {
-        fun onCategorySelected(category: Category)
+        fun onCategorySelected(categoryId: Long)
     }
 
     private fun fetchCategories() {
@@ -116,7 +107,7 @@ class CategoriesFragment : Fragment() {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+                print(e)
             }
         }, "category")
     }
@@ -126,7 +117,7 @@ class CategoriesFragment : Fragment() {
             kotlin.run {
                 val activity = activity as Context
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.categoryRecyclerView)
-                recyclerView?.layoutManager = LinearLayoutManager(activity)
+                recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                 recyclerView?.adapter = CategoryRecyclerViewAdapter(categories, activity)
             }
         }
