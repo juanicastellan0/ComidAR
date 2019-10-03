@@ -17,6 +17,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import um.comidar.R
+import um.comidar.databinding.DishLayoutBinding
 import um.comidar.databinding.RestaurantDetailsFragmentBinding
 import um.comidar.helpers.ComidarApi
 import um.comidar.models.Dish
@@ -68,41 +69,41 @@ class RestaurantDetailsFragment : Fragment() {
         return restaurantDetailsFragmentBinding.root
     }
 
-//    internal inner class DishRecyclerViewAdapter(
-//        private val dishes: List<Dish>,
-//        context: Context
-//    ): RecyclerView.Adapter<DishViewHolder>() {
-//        override fun onBindViewHolder(
-//            viewHolder: DishViewHolder,
-//            position: Int
-//        ) {
-//            val dish = dishes[position]
-//            viewHolder.setData(dish)
-//            viewHolder.itemView.setOnClickListener { listener.onDishSelected(dish) }
-//        }
-//
-//        private val layoutInflater = LayoutInflater.from(context)
-//
-//        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DishViewHolder {
-//            val dishItemLayoutBinding =
-//                DishItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
-//            return DishViewHolder(
-//                dishItemLayoutBinding.root,
-//                dishItemLayoutBinding
-//            )
-//        }
-//
-//        override fun getItemCount() = dishes.size
-//    }
-//
-//    internal inner class DishViewHolder(view: View,
-//                                        private val dishItemLayoutBinding:
-//                                        DishItemLayoutBinding
-//    ): RecyclerView.ViewHolder(view) {
-//        fun setData(dish: Dish) {
-//            dishItemLayoutBinding.dish = dish
-//        }
-//    }
+    internal inner class DishRecyclerViewAdapter(
+        private val dishes: List<Dish>,
+        context: Context
+    ): RecyclerView.Adapter<DishViewHolder>() {
+        override fun onBindViewHolder(
+            viewHolder: DishViewHolder,
+            position: Int
+        ) {
+            val dish = dishes[position]
+            viewHolder.setData(dish)
+            viewHolder.itemView.setOnClickListener { listener.onDishSelected(dish) }
+        }
+
+        private val layoutInflater = LayoutInflater.from(context)
+
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DishViewHolder {
+            val dishItemLayoutBinding =
+                DishLayoutBinding.inflate(layoutInflater, viewGroup, false)
+            return DishViewHolder(
+                dishItemLayoutBinding.root,
+                dishItemLayoutBinding
+            )
+        }
+
+        override fun getItemCount() = dishes.size
+    }
+
+    internal inner class DishViewHolder(view: View,
+                                        private val dishItemLayoutBinding:
+                                        DishLayoutBinding
+    ): RecyclerView.ViewHolder(view) {
+        fun setData(dish: Dish) {
+            dishItemLayoutBinding.dish = dish
+        }
+    }
 
     interface OnDishSelected {
         fun onDishSelected(dish: Dish)
@@ -131,7 +132,7 @@ class RestaurantDetailsFragment : Fragment() {
                 val activity = activity as Context
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.dishRecyclerView)
                 recyclerView?.layoutManager = LinearLayoutManager(activity)
-//                recyclerView?.adapter = DishRecyclerViewAdapter(dishes, activity)
+                recyclerView?.adapter = DishRecyclerViewAdapter(dishes, activity)
             }
         }
     }

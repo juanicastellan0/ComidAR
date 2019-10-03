@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+                name="dish"
+                type="um.comidar.models.Dish" />
+    </data>
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/dishName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dish.name}"
+                android:textSize="20sp"/>
+
+    </LinearLayout>
+</layout>

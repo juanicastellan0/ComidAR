@@ -1,17 +1,19 @@
 package um.comidar
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import um.comidar.fragments.CategoriesFragment
 import um.comidar.fragments.RestaurantDetailsFragment
 import um.comidar.fragments.RestaurantsFragment
 import um.comidar.models.Category
+import um.comidar.models.Dish
 import um.comidar.models.Restaurant
 
 class MainActivity : FragmentActivity(),
     CategoriesFragment.OnCategorySelected,
-    RestaurantsFragment.OnRestaurantSelected {
-
+    RestaurantsFragment.OnRestaurantSelected,
+    RestaurantDetailsFragment.OnDishSelected {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,6 +42,10 @@ class MainActivity : FragmentActivity(),
             .add(R.id.mainLayout, detailsFragment, "restaurantDetails")
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onDishSelected(dish: Dish) {
+        Toast.makeText(this, dish.name, Toast.LENGTH_SHORT).show()
     }
 }
 
