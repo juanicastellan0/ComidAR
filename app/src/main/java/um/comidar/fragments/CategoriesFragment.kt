@@ -2,21 +2,31 @@ package um.comidar.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.GsonBuilder
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
 
 import um.comidar.R
 import um.comidar.models.Category
-import um.comidar.databinding.CategoryLayoutBinding
+import um.comidar.databinding.CategoryItemLayoutBinding
+import um.comidar.helpers.ComidarApi
+import um.comidar.helpers.GridItemDecoration
+import java.io.IOException
 
 class CategoriesFragment : Fragment() {
 
-    private lateinit var imageResIds: IntArray
-    private lateinit var categoryNames: Array<String>
     private lateinit var listener: OnCategorySelected
 
     companion object {
@@ -31,59 +41,51 @@ class CategoriesFragment : Fragment() {
         } else {
             throw ClassCastException("$context must implement OnCategorySelected.")
         }
+    }
 
-        val resources = context.resources
-        categoryNames = resources.getStringArray(R.array.categoryNames)
-        val typedArray = resources.obtainTypedArray(R.array.images)
-        val imageCount = categoryNames.size
-        imageResIds = IntArray(imageCount)
-        for (i in 0 until imageCount) {
-            imageResIds[i] = typedArray.getResourceId(i, 0)
-        }
-        typedArray.recycle()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fetchCategories()
     }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.categories_list_fragment, container,
-            false)
-        val activity = activity as Context
-        val recyclerView = view.findViewById<RecyclerView>(R.id.categoryRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = CategoryRecyclerViewAdapter(activity)
-        return view
+        return inflater.inflate(R.layout.categories_list_fragment, container,false)
     }
 
-    internal inner class CategoryRecyclerViewAdapter(context: Context)
-        : RecyclerView.Adapter<CategoryViewHolder>() {
+    internal inner class CategoryRecyclerViewAdapter(
+        private val categories: List<Category>,
+        context: Context
+    ) : RecyclerView.Adapter<CategoryViewHolder>() {
         override fun onBindViewHolder(
             viewHolder: CategoryViewHolder,
             position: Int
         ) {
-            val category = Category(imageResIds[position], 0, categoryNames[position])
+            val category : Category = categories[position]
             viewHolder.setData(category)
-            viewHolder.itemView.setOnClickListener { listener.onCategorySelected(category) }
+            viewHolder.itemView.findViewById<ImageButton>(R.id.categoryImage).setOnClickListener {
+                listener.onCategorySelected(category.categoryId)
+            }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CategoryViewHolder {
             val recyclerItemCategoryListBinding =
-                CategoryLayoutBinding.inflate(layoutInflater, viewGroup, false)
+                CategoryItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
             return CategoryViewHolder(
                 recyclerItemCategoryListBinding.root,
                 recyclerItemCategoryListBinding
             )
         }
 
-        override fun getItemCount() = categoryNames.size
+        override fun getItemCount() = categories.size
     }
 
     internal inner class CategoryViewHolder(view: View,
                                             private val recyclerItemCategoryListBinding:
-                                            CategoryLayoutBinding
+                                            CategoryItemLayoutBinding
     ) : RecyclerView.ViewHolder(view) {
 
         fun setData(category: Category) {
@@ -92,10 +94,9 @@ class CategoriesFragment : Fragment() {
     }
 
     interface OnCategorySelected {
-        fun onCategorySelected(category: Category)
+        fun onCategorySelected(categoryId: Long)
     }
 
-    /*
     private fun fetchCategories() {
         ComidarApi.getList(object: Callback {
             override fun onResponse(call: Call, response: Response) {
@@ -108,7 +109,7 @@ class CategoriesFragment : Fragment() {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+                print(e)
             }
         }, "category")
     }
@@ -116,11 +117,12 @@ class CategoriesFragment : Fragment() {
     private fun showCategories(categories: List<Category>) {
         Handler(Looper.getMainLooper()).post {
             kotlin.run {
-                categoryRecyclerView.layoutManager = LinearLayoutManager(activity)
-                categoryRecyclerView.adapter =
-                    CategoryRecyclerViewAdapter(categories)
+                val activity = activity as Context
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.categoryRecyclerView)
+                recyclerView?.layoutManager = GridLayoutManager(activity,2)
+                recyclerView?.addItemDecoration(GridItemDecoration(10,2))
+                recyclerView?.adapter = CategoryRecyclerViewAdapter(categories, activity)
             }
         }
     }
-     */
 }

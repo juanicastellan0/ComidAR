@@ -1,26 +1,10 @@
 package um.comidar.models
 
-class Dish(
-    dishId : Long,
-    name : String,
-    description : String,
-    restaurantId : Long,
-    price : Double,
-    enable : Boolean
-) {
-    var dishId : Long = 0
-    var name : String = ""
-    var description : String = ""
-    var restaurantId : Long = 0
-    var price : Double = .0
-    var enable : Boolean = false
+import java.io.Serializable
 
-    init {
-        this.dishId = dishId
-        this.name = name
-        this.description = description
-        this.restaurantId = restaurantId
-        this.price = price
-        this.enable = enable
-    }
-}
+class Dish(val dishId: Long,
+           val name: String,
+           val description: String,
+           val restaurantId: Long,
+           val price: Double,
+           val enable: Boolean): Serializable

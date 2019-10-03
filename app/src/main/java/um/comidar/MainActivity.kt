@@ -3,10 +3,14 @@ package um.comidar
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import um.comidar.fragments.CategoriesFragment
-import um.comidar.fragments.CategoryDetailsFragment
+import um.comidar.fragments.RestaurantDetailsFragment
+import um.comidar.fragments.RestaurantsFragment
 import um.comidar.models.Category
+import um.comidar.models.Restaurant
 
-class MainActivity : FragmentActivity(), CategoriesFragment.OnCategorySelected {
+class MainActivity : FragmentActivity(),
+    CategoriesFragment.OnCategorySelected,
+    RestaurantsFragment.OnRestaurantSelected {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +24,20 @@ class MainActivity : FragmentActivity(), CategoriesFragment.OnCategorySelected {
         }
     }
 
-    override fun onCategorySelected(category: Category) {
-        val detailsFragment = CategoryDetailsFragment.newInstance(category)
+    override fun onCategorySelected(categoryId: Long) {
+        val restaurantsFragment = RestaurantsFragment.newInstance(categoryId)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.mainLayout, detailsFragment, "categoryDetails")
+            .add(R.id.mainLayout, restaurantsFragment, "restaurantList")
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onRestaurantSelected(restaurant: Restaurant) {
+        val detailsFragment = RestaurantDetailsFragment.newInstance(restaurant)
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.mainLayout, detailsFragment, "restaurantDetails")
             .addToBackStack(null)
             .commit()
     }
