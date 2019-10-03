@@ -32,13 +32,13 @@
                 android:layout_gravity="center_vertical">
             <TextView
                     android:id="@+id/restaurantName"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{restaurant.name}"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:text="@{restaurant.name}" />
             <TextView
                     android:id="@+id/restaurantDescription"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:text="@{restaurant.description}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

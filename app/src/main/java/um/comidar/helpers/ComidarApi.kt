@@ -17,4 +17,10 @@ object ComidarApi {
         val request = Request.Builder().url(url).build()
         client.newCall(request).enqueue(callback)
     }
+
+    fun getDishesByRestaurantId(callback: Callback, restaurantId: Long) {
+        val url = "$baseURL/admin/dish/list/search?restaurantId=$restaurantId"
+        val request = Request.Builder().url(url).build()
+        client.newCall(request).enqueue(callback)
+    }
 }

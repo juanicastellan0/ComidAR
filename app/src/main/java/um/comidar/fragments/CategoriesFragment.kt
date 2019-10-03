@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -21,6 +22,7 @@ import um.comidar.R
 import um.comidar.models.Category
 import um.comidar.databinding.CategoryItemLayoutBinding
 import um.comidar.helpers.ComidarApi
+import um.comidar.helpers.GridItemDecoration
 import java.io.IOException
 
 class CategoriesFragment : Fragment() {
@@ -117,7 +119,8 @@ class CategoriesFragment : Fragment() {
             kotlin.run {
                 val activity = activity as Context
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.categoryRecyclerView)
-                recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                recyclerView?.layoutManager = GridLayoutManager(activity,2)
+                recyclerView?.addItemDecoration(GridItemDecoration(10,2))
                 recyclerView?.adapter = CategoryRecyclerViewAdapter(categories, activity)
             }
         }
