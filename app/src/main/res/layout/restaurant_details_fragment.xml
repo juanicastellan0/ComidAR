@@ -58,7 +58,7 @@
                     android:text="@{restaurant.email}" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    tools:listitem="@layout/dish_layout"
+                    tools:listitem="@layout/dish_item_layout"
                     android:id="@+id/dishRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

@@ -17,7 +17,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import um.comidar.R
-import um.comidar.databinding.DishLayoutBinding
+import um.comidar.databinding.DishItemLayoutBinding
 import um.comidar.databinding.RestaurantDetailsFragmentBinding
 import um.comidar.helpers.ComidarApi
 import um.comidar.models.Dish
@@ -86,7 +86,7 @@ class RestaurantDetailsFragment : Fragment() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DishViewHolder {
             val dishItemLayoutBinding =
-                DishLayoutBinding.inflate(layoutInflater, viewGroup, false)
+                DishItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
             return DishViewHolder(
                 dishItemLayoutBinding.root,
                 dishItemLayoutBinding
@@ -98,7 +98,7 @@ class RestaurantDetailsFragment : Fragment() {
 
     internal inner class DishViewHolder(view: View,
                                         private val dishItemLayoutBinding:
-                                        DishLayoutBinding
+                                        DishItemLayoutBinding
     ): RecyclerView.ViewHolder(view) {
         fun setData(dish: Dish) {
             dishItemLayoutBinding.dish = dish
