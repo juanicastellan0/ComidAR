@@ -7,10 +7,12 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.ar.core.ArCoreApk
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import okhttp3.Call
@@ -63,9 +65,10 @@ class RestaurantDetailsFragment : Fragment() {
         val restaurantDetailsFragmentBinding =
             RestaurantDetailsFragmentBinding.inflate(inflater, container, false)
         val model = arguments!!.getSerializable(RESTAURANTMODEL) as Restaurant
-        val image = restaurantDetailsFragmentBinding.root.findViewById<ImageView>(R.id.restaurantPhoto)
+        val image = restaurantDetailsFragmentBinding.restaurantPhoto
         Picasso.get().load(model.imageTemporaryUrl).into(image)
         restaurantDetailsFragmentBinding.restaurant = model
+
         return restaurantDetailsFragmentBinding.root
     }
 
@@ -87,6 +90,9 @@ class RestaurantDetailsFragment : Fragment() {
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DishViewHolder {
             val dishItemLayoutBinding =
                 DishItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
+
+            maybeEnableArButton(dishItemLayoutBinding.arButton)
+
             return DishViewHolder(
                 dishItemLayoutBinding.root,
                 dishItemLayoutBinding
@@ -94,6 +100,23 @@ class RestaurantDetailsFragment : Fragment() {
         }
 
         override fun getItemCount() = dishes.size
+
+        fun maybeEnableArButton(arButton: Button) {
+            val availability = ArCoreApk.getInstance().checkAvailability(activity)
+            if (availability.isTransient) {
+                Handler().postDelayed({
+                    @Override
+                    fun run() {
+                        maybeEnableArButton(arButton)
+                    }
+                }, 200)
+            }
+            if (availability.isSupported) {
+                arButton.visibility = View.VISIBLE
+            } else {
+                arButton.visibility = View.INVISIBLE
+            }
+        }
     }
 
     internal inner class DishViewHolder(view: View,
