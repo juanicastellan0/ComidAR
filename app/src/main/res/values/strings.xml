@@ -2,4 +2,5 @@
     <string name="app_name">ComidAR</string>
     <string name="category">Categoría</string>
     <string name="restaurante">restaurante</string>
+    <string name="ar_button">Ver plato AR</string>
 </resources>
