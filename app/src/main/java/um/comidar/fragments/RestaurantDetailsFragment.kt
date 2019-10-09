@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.ar.core.ArCoreApk
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.dish_item_layout.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -81,7 +82,7 @@ class RestaurantDetailsFragment : Fragment() {
         ) {
             val dish = dishes[position]
             viewHolder.setData(dish)
-            viewHolder.itemView.setOnClickListener { listener.onDishSelected(dish) }
+            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish) }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
