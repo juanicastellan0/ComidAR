@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -91,7 +90,7 @@ class RestaurantDetailsFragment : Fragment() {
             val dishItemLayoutBinding =
                 DishItemLayoutBinding.inflate(layoutInflater, viewGroup, false)
 
-            maybeEnableArButton(dishItemLayoutBinding.arButton)
+            dishItemLayoutBinding.arButton.visibility = maybeEnableArButton()
 
             return DishViewHolder(
                 dishItemLayoutBinding.root,
@@ -101,21 +100,17 @@ class RestaurantDetailsFragment : Fragment() {
 
         override fun getItemCount() = dishes.size
 
-        fun maybeEnableArButton(arButton: Button) {
+        private fun maybeEnableArButton(): Int {
             val availability = ArCoreApk.getInstance().checkAvailability(activity)
             if (availability.isTransient) {
                 Handler().postDelayed({
                     @Override
                     fun run() {
-                        maybeEnableArButton(arButton)
+                        maybeEnableArButton()
                     }
                 }, 200)
             }
-            if (availability.isSupported) {
-                arButton.visibility = View.VISIBLE
-            } else {
-                arButton.visibility = View.INVISIBLE
-            }
+            return if (availability.isSupported) View.VISIBLE else View.INVISIBLE
         }
     }
 
