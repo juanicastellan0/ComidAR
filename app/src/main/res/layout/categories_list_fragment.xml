@@ -6,10 +6,14 @@
         tools:context=".fragments.CategoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/category_item_layout"
             android:id="@+id/categoryRecyclerView"
-            android:background="@color/colorBackground"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="40dp"
+            android:paddingRight="20dp"
+            tools:listitem="@layout/category_item_layout" />
 
 </RelativeLayout>

@@ -5,28 +5,30 @@
                 name="category"
                 type="um.comidar.models.Category" />
     </data>
-    <LinearLayout
+
+    <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+        <ImageButton
+                android:id="@+id/categoryImage"
+                android:layout_width="165dp"
+                android:layout_height="165dp"
+                android:layout_margin="10dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/round_category"
+                android:contentDescription="@string/category"
+                android:padding="30dp"
+                android:scaleType="fitCenter" />
 
         <TextView
                 android:id="@+id/categoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
                 android:text="@{category.name}"
-                android:textSize="20sp"/>
-        <ImageButton
-                android:id="@+id/categoryImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="20dp"
-                android:padding="30dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="@color/colorAccent"
-                android:contentDescription="@string/category"/>
+                android:textSize="20sp" />
 
-    </LinearLayout>
+    </FrameLayout>
 </layout>
