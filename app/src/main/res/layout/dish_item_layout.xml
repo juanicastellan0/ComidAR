@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
                 name="dish"
@@ -9,19 +10,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+        <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:id="@+id/dishImage"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@{dish.name}"
+                tools:ignore="RtlHardcoded" />
 
-        <TextView
-            android:id="@+id/dishName"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{dish.name}"
-            android:textSize="20sp"/>
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                    android:id="@+id/dishName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dish.name}"
+                    android:textSize="20sp"/>
+            <TextView
+                    android:id="@+id/dishPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{` $` + dish.price}"
+                    android:textSize="20sp"/>
+        </LinearLayout>
         <Button
-            android:id="@+id/arButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ar_button" />
-
+                android:id="@+id/arButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="drawable/ar_icon"/>
     </LinearLayout>
 </layout>
