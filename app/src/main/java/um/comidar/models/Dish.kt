@@ -7,4 +7,5 @@ class Dish(val dishId: Long,
            val description: String,
            val restaurantId: Long,
            val price: Double,
-           val enable: Boolean): Serializable
+           val enable: Boolean,
+           val gltf_temporary_url: String): Serializable

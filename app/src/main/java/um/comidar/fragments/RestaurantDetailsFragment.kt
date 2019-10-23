@@ -82,7 +82,7 @@ class RestaurantDetailsFragment : Fragment() {
         ) {
             val dish = dishes[position]
             viewHolder.setData(dish)
-            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish) }
+            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish.gltf_temporary_url) }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
@@ -125,7 +125,7 @@ class RestaurantDetailsFragment : Fragment() {
     }
 
     interface OnDishSelected {
-        fun onDishSelected(dish: Dish)
+        fun onDishSelected(dish_gltf_temporary_url: String)
     }
 
     private fun fetchDishesByRestauranId(restaurantId: Long) {
