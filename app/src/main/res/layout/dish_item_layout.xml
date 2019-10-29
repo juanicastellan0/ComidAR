@@ -44,11 +44,15 @@
                     android:text="@{` $` + dish.price}"
                     android:textSize="20sp"/>
         </LinearLayout>
-        <Button
+        <ImageButton
                 android:id="@+id/arButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="drawable/ar_icon"/>
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/ar_icon"
+                android:scaleType="center"
+                android:gravity="center_horizontal"
+                android:contentDescription="@string/button_ar" />
     </LinearLayout>
 </layout>
