@@ -9,6 +9,8 @@
             tools:listitem="@layout/restaurant_item_layout"
             android:id="@+id/restaurantRecyclerView"
             android:background="@color/colorBackground"
+            android:clipToPadding="false"
+            android:paddingTop="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
