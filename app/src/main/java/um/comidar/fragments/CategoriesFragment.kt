@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import com.squareup.picasso.Picasso
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -88,7 +90,14 @@ class CategoriesFragment : Fragment() {
                                             CategoryItemLayoutBinding
     ) : RecyclerView.ViewHolder(view) {
 
+        private var image: ImageView? = null
+
+        init {
+            image = itemView.findViewById(R.id.categoryImage)
+        }
+
         fun setData(category: Category) {
+            Picasso.get().load(category.imageTemporaryUrl).into(image)
             recyclerItemCategoryListBinding.category = category
         }
     }
