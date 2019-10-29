@@ -21,14 +21,14 @@
                 android:padding="30dp"
                 android:scaleType="fitCenter" />
 
-        <TextView
-                android:id="@+id/categoryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="false"
-                android:text="@{category.name}"
-                android:textSize="20sp" />
+<!--        <TextView-->
+<!--                android:id="@+id/categoryName"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:clickable="false"-->
+<!--                android:text="@{category.name}"-->
+<!--                android:textSize="20sp" />-->
 
     </FrameLayout>
 </layout>

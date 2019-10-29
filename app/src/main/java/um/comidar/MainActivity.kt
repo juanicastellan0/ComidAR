@@ -1,8 +1,7 @@
 package um.comidar
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import um.comidar.fragments.CategoriesFragment
@@ -50,7 +49,8 @@ class MainActivity : FragmentActivity(),
     }
 
     override fun onDishSelected(dish: Dish) {
-        Toast.makeText(this, dish.name, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DishSceneformActivity::class.java)
+        startActivity(intent)
     }
 }
 
