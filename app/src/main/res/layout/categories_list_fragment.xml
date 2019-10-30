@@ -11,8 +11,9 @@
             android:layout_height="match_parent"
             android:background="@color/colorBackground"
             android:orientation="horizontal"
+            android:clipToPadding="false"
             android:paddingLeft="20dp"
-            android:paddingTop="40dp"
+            android:paddingTop="60dp"
             android:paddingRight="20dp"
             tools:listitem="@layout/category_item_layout" />
 
