@@ -6,5 +6,13 @@
     android:layout_height="match_parent"
     android:id="@+id/mainLayout"
     tools:context="um.comidar.MainActivity">
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </FrameLayout>

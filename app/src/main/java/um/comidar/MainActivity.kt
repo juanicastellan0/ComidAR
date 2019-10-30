@@ -3,6 +3,7 @@ package um.comidar
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import um.comidar.fragments.CategoriesFragment
 import um.comidar.fragments.RestaurantDetailsFragment
 import um.comidar.fragments.RestaurantsFragment
@@ -14,9 +15,12 @@ class MainActivity : FragmentActivity(),
     RestaurantsFragment.OnRestaurantSelected,
     RestaurantDetailsFragment.OnDishSelected
 {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar.setLogo(R.drawable.logo)
 
         if (savedInstanceState == null) {
             supportFragmentManager

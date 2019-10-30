@@ -7,7 +7,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -82,7 +82,7 @@ class RestaurantDetailsFragment : Fragment() {
         ) {
             val dish = dishes[position]
             viewHolder.setData(dish)
-            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish.gltf_temporary_url) }
+            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish.modelTemporaryUrl) }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
@@ -119,7 +119,15 @@ class RestaurantDetailsFragment : Fragment() {
                                         private val dishItemLayoutBinding:
                                         DishItemLayoutBinding
     ): RecyclerView.ViewHolder(view) {
+
+        private var image: ImageView? = null
+
+        init {
+            image = itemView.findViewById(R.id.dishImage)
+        }
+
         fun setData(dish: Dish) {
+            Picasso.get().load(dish.modelTemporaryUrl).into(image)
             dishItemLayoutBinding.dish = dish
         }
     }
