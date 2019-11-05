@@ -82,7 +82,7 @@ class RestaurantDetailsFragment : Fragment() {
         ) {
             val dish = dishes[position]
             viewHolder.setData(dish)
-            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish) }
+            viewHolder.itemView.arButton.setOnClickListener { listener.onDishSelected(dish.modelTemporaryUrl) }
         }
 
         private val layoutInflater = LayoutInflater.from(context)
@@ -127,13 +127,13 @@ class RestaurantDetailsFragment : Fragment() {
         }
 
         fun setData(dish: Dish) {
-            Picasso.get().load(dish.imageTemporaryUrl).into(image)
+            Picasso.get().load(dish.modelTemporaryUrl).into(image)
             dishItemLayoutBinding.dish = dish
         }
     }
 
     interface OnDishSelected {
-        fun onDishSelected(dish: Dish)
+        fun onDishSelected(dish_gltf_temporary_url: String)
     }
 
     private fun fetchDishesByRestauranId(restaurantId: Long) {

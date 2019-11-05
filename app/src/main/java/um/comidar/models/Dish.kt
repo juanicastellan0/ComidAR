@@ -8,4 +8,4 @@ class Dish(val dishId: Long,
            val restaurantId: Long,
            val price: Double,
            val enable: Boolean,
-           val imageTemporaryUrl: String): Serializable
+           val modelTemporaryUrl: String): Serializable

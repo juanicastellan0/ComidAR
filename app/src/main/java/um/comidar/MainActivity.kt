@@ -48,8 +48,9 @@ class MainActivity : FragmentActivity(),
             .commit()
     }
 
-    override fun onDishSelected(dish: Dish) {
+    override fun onDishSelected(dish_gltf_temporary_url: String) {
         val intent = Intent(this, DishSceneformActivity::class.java)
+        intent.putExtra("gltf_url", dish_gltf_temporary_url)
         startActivity(intent)
     }
 }
