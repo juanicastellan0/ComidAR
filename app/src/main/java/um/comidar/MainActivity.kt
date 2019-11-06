@@ -48,8 +48,9 @@ class MainActivity : FragmentActivity(),
             .commit()
     }
 
-    override fun onDishSelected(dish: Dish) {
+    override fun onDishSelected(dishId: Long) {
         val intent = Intent(this, DishSceneformActivity::class.java)
+        intent.putExtra("dish_id", dishId)
         startActivity(intent)
     }
 }

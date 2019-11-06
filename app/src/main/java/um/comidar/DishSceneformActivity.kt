@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -35,8 +36,10 @@ class DishSceneformActivity : AppCompatActivity() {
         arFragment = supportFragmentManager.findFragmentById(R.id.ux_fragment) as ArFragment?
         // When you build a Renderable, Sceneform loads its resources in the background while returning
         // a CompletableFuture. Call thenAccept(), handle(), or check isDone() before calling get().
+        val dishId: Long? = intent.getLongExtra("dish_id", 0)
+        val asset = "$dishId.sfb"
         ModelRenderable.builder()
-            .setSource(this, R.raw.andy)
+            .setSource(this, Uri.parse(asset))
             .build()
             .thenAccept { renderable -> modelRenderable = renderable }
             .exceptionally {
