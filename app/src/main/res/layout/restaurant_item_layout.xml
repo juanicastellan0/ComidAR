@@ -38,8 +38,14 @@
                     android:text="@{restaurant.name}" />
             <TextView
                     android:id="@+id/restaurantDescription"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.AppCompat.Body2"
                     android:text="@{restaurant.description}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/restaurantDirection"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:text="@{restaurant.direction}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

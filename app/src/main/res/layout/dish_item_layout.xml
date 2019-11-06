@@ -33,12 +33,14 @@
 
             <TextView
                     android:id="@+id/dishName"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{dish.name}"
                     android:textSize="20sp"/>
             <TextView
                     android:id="@+id/dishPrice"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{` $` + dish.price}"
@@ -49,10 +51,11 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
+                android:paddingTop="10dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/ar_icon"
                 android:scaleType="center"
-                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical|end"
                 android:contentDescription="@string/button_ar" />
     </LinearLayout>
 </layout>

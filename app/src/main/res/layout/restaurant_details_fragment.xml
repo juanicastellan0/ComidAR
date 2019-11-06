@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/restaurantPhoto"
                 android:layout_width="wrap_content"
-                android:layout_height="400dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:adjustViewBounds="true"
@@ -34,13 +34,13 @@
                 android:scaleType="centerCrop" />
             <TextView
                     android:id="@+id/restaurantDescription"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.AppCompat.Display1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{restaurant.description}" />
             <TextView
                     android:id="@+id/restaurantDirection"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{restaurant.direction}" />
@@ -52,10 +52,25 @@
                     android:text="@{restaurant.telephone}" />
             <TextView
                     android:id="@+id/restaurantEmail"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:text="@{restaurant.email}" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:text="@string/menu" />
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                     tools:listitem="@layout/dish_item_layout"

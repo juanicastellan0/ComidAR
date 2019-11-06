@@ -4,4 +4,5 @@
     <string name="restaurante">restaurante</string>
     <string name="ar_button">Ver plato AR</string>
     <string name="button_ar">BotónAR</string>
+    <string name="menu">Menú</string>
 </resources>

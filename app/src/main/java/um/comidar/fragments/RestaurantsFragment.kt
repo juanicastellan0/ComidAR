@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -128,8 +129,15 @@ class RestaurantsFragment : Fragment() {
             kotlin.run {
                 val activity = activity as Context
                 val recyclerView = view?.findViewById<RecyclerView>(R.id.restaurantRecyclerView)
+
                 recyclerView?.layoutManager = LinearLayoutManager(activity)
                 recyclerView?.adapter = RestaurantRecyclerViewAdapter(restaurants, activity)
+
+                val dividerItemDecoration = DividerItemDecoration(
+                    recyclerView?.context,
+                    (recyclerView?.layoutManager as LinearLayoutManager).orientation
+                )
+                recyclerView?.addItemDecoration(dividerItemDecoration)
             }
         }
     }
